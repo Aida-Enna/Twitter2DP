@@ -2,6 +2,8 @@
 	{
 		"account_to_check": "WholesomeMeme",
 		"posting_text": "Check out this super wholesome tweet - <tweetlink>",
+		"webhook_avatar_url": "https://i.imgur.com/tyRc1sC.png",
+		"webhook_name": "Wholesome Memes",
 		"webhook_url": "Your_discord_webhook_URL_here"
 	},
 	{
