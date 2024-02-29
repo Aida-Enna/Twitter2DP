@@ -1,12 +1,12 @@
 [
 	{
 		"account_to_check": "WholesomeMeme",
-		"posting_channel": 1234567890123456789,
-		"posting_text": "Check out this super wholesome tweet - <tweetlink>"
+		"posting_text": "Check out this super wholesome tweet - <tweetlink>",
+		"webhook_url": "Your_discord_webhook_URL_here"
 	},
 	{
 		"account_to_check": "ArknightsEN",
-		"posting_channel": 1234567890123456789,
 		"posting_text": "Doctor, a new tweet has arrived! <tweetlink>",
+		"webhook_url": "Your_discord_webhook_URL_here"
 	}
 ]
