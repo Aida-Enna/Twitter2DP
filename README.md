@@ -9,3 +9,7 @@ Big thanks to the [Twikit API wrapper](https://github.com/d60/twikit).
 
 1. Rename the ".env_example" and "users.json_example" files to remove the "_example" from both. Fill them out, there is no limit on the amount of users you can add.
 2. Run the script with ``python twitter2dp.py``
+
+Possible improvements:
+
+* An accounts.json with some twitter accounts in it which the program will swap between every so often to avoid rate limiting/account closure?
