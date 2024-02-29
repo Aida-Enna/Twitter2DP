@@ -66,24 +66,30 @@ def check_users_json():
 def get_latest_tweets():
 	raw_json = open('users.json')
 	twitter_users = json.load(raw_json)
-	twitter_users_previous = twitter_users
+	WriteChanges = False
 
 	for twitter_user in twitter_users:
 		#If we don't have a previous tweet recorded, just put something there so it fails successfully.
 		if 'previous_tweet_id' not in twitter_user:
 			twitter_user['previous_tweet_id'] = 'null'
+			WriteChanges = True
 
 		user = client.get_user_by_screen_name(twitter_user['account_to_check'])
 		user_tweets = user.get_tweets('Tweets')
 		
 		lasttweet = "Nothing?"
 		
+		#print("Checking " + str(len(user_tweets)) + " tweet(s) for non-retweets...")
 		for tweet in user_tweets:
 			if not tweet.text.startswith("RT @"): #to be replaced with if tweet.retweeted == False when the API person fixes it
+				#print("Found an original tweet! " + tweet.text)
 				lasttweet = tweet
+			#else:
+				#print("Retweet...")
 				
+		#print(lasttweet)
 		if lasttweet == "Nothing?":
-			#No new non-retweet in the past 20? tweets, moving on...'
+			#print('No new non-retweet in the past 20? tweets, moving on...')
 			continue
 		
 		if twitter_user['previous_tweet_id'] == lasttweet.id:
@@ -109,9 +115,11 @@ def get_latest_tweets():
 		
 		#save the previous ID so we don't keep posting
 		twitter_user['previous_tweet_id'] = lasttweet.id
+		WriteChanges = True
 	
 	#If something has changed, then write the new json
-	if twitter_users_previous is not twitter_users:
+	if WriteChanges:
+		
 		#write the JSON with the new previous tweet IDs
 		with open('users.json', 'w') as f:
 			json.dump(twitter_users, f, ensure_ascii=False, sort_keys=True, indent='\t')
