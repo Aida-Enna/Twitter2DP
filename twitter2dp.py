@@ -78,17 +78,12 @@ def get_latest_tweets():
 		
 		lasttweet = "Nothing?"
 		
-		#print("Checking " + str(len(user_tweets)) + " tweet(s) for non-retweets...")
 		for tweet in user_tweets:
 			if not tweet.text.startswith("RT @"): #to be replaced with if tweet.retweeted == False when the API person fixes it
-				#print("Found an original tweet! " + tweet.text)
 				lasttweet = tweet
-			#else:
-				#print("Retweet...")
 				
-		#print(lasttweet)
 		if lasttweet == "Nothing?":
-			#print('No new non-retweet in the past 20? tweets, moving on...')
+			#No new non-retweet in the past 20? tweets, moving on...'
 			continue
 		
 		if twitter_user['previous_tweet_id'] == lasttweet.id:
