@@ -5,5 +5,5 @@ A simple script that will check on a list of user's last tweets and send them to
 ## Installation
 ``pip install -r requirements.txt``
 
-1. Rename the ".env_example" and "users.json_example" files to remove the "_example" from both. Fill them out.
+1. Rename the ".env_example" and "users.json_example" files to remove the "_example" from both. Fill them out, there is no limit on the amount of users you can add.
 2. Run the script with ``python twitter2dp.py``
