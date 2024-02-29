@@ -37,15 +37,30 @@ def check_users_json():
 		exit()
 
 	for twitter_user in twitter_users:
-		#print(twitter_user)
+		print("Loading " + str(len(twitter_users)) + " twitter user(s) to monitor...")
+		
 		if 'account_to_check' not in twitter_user:
-			print(Fore.RED + 'ERROR: One of the JSON entries is missing an account_to_check entry! Please check the users.json file and relaunch.')
+			print(Fore.RED + "ERROR: One of the JSON entries is missing an " + Fore.YELLOW + "account_to_check" + Fore.RED + " entry! Please check the users.json file and relaunch.")
 			exit()
+			
 		if 'posting_text' not in twitter_user:
-			print(Fore.RED + f"ERROR: The JSON entry for {twitter_user['account_to_check']} is missing a posting_text entry! Please check the users.json file and relaunch.")
+			print(Fore.RED + "ERROR: The JSON entry for " + Fore.WHITE + twitter_user['account_to_check'] + Fore.RED + " is missing a " + Fore.YELLOW + "posting_text" + Fore.RED + " entry! Please check the users.json file and relaunch.")
 			exit()
+			
 		if 'webhook_url' not in twitter_user:
-			print(Fore.RED + f"ERROR: The JSON entry for {twitter_user['account_to_check']} is missing a webhook_url entry! Please check the users.json file and relaunch.")
+			print(Fore.RED + "ERROR: The JSON entry for " + Fore.WHITE + twitter_user['account_to_check'] + Fore.RED + " is missing a " + Fore.YELLOW + "webhook_url" + Fore.RED + " entry! Please check the users.json file and relaunch.")
+			exit()
+			
+		if not twitter_user['account_to_check']:
+			print(Fore.RED + "ERROR: One of the JSON entries has a blank " + Fore.YELLOW + "account_to_check" + Fore.RED + " entry! Please check the users.json file and relaunch.")
+			exit()
+			
+		if not twitter_user['posting_text']:
+			print(Fore.RED + "ERROR: The JSON entry for " + Fore.WHITE + twitter_user['account_to_check'] + Fore.RED + " has a blank " + Fore.YELLOW + "posting_text" + Fore.RED + " entry! Please check the users.json file and relaunch.")
+			exit()
+			
+		if not twitter_user['webhook_url']:
+			print(Fore.RED + "ERROR: The JSON entry for " + Fore.WHITE + twitter_user['account_to_check'] + Fore.RED + " has a blank " + Fore.YELLOW + "webhook_url" + Fore.RED + " entry! Please check the users.json file and relaunch.")
 			exit()
 
 def get_latest_tweets():
@@ -65,7 +80,6 @@ def get_latest_tweets():
 			continue
 		
 		#omg a hit tweet, let's post it
-		#channel = bot.get_channel(int(twitter_user['posting_channel']))
 		#https://twitter.com/Username/status/TweetID
 		tweetlink = f'https://twitter.com/{twitter_user["account_to_check"]}/status/{user_tweets[0].id}'
 		
@@ -90,6 +104,10 @@ if __name__ == '__main__':
 	print(Fore.CYAN + '   ██║   ╚███╔███╔╝██║   ██║      ██║   ███████╗██║  ██║███████╗██████╔╝██║     ')
 	print(Fore.CYAN + '   ╚═╝    ╚══╝╚══╝ ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝     ')
 	print('')
+	print('Source available at https://github.com/Aida-Enna/Twitter2DP')
 	check_users_json()
-	get_latest_tweets()
+	print(Fore.GREEN + 'Configuration loaded successfully, now watching for new tweets every ' + CHECK_TIMER_IN_SECONDS + " seconds.")
+	while True:
+		get_latest_tweets()
+		time.sleep(int(CHECK_TIMER_IN_SECONDS))
 	
