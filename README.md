@@ -12,8 +12,9 @@ Big thanks to the [Twikit API wrapper](https://github.com/d60/twikit) for making
 
 Optional arguments for users.sjon
 
-webhook_avatar_url - a URL pointing to the image the webhook should use as it's profile picture
-webhook_name - a name the webhook should use when posting
+``webhook_avatar_url`` - a URL pointing to the image the webhook should use as it's profile picture
+
+``webhook_name`` - a name the webhook should use when posting
 
 Possible improvements:
 
