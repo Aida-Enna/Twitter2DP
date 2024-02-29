@@ -2,7 +2,7 @@
 
 A simple script that will check on a list of user's last tweets and send them to the specified webhook if there's a new one, on a configurable timer.
 
-Big thanks to the [Twikit API wrapper](https://github.com/d60/twikit).
+Big thanks to the [Twikit API wrapper](https://github.com/d60/twikit) for making this possible!
 
 ## Installation
 ``pip install -r requirements.txt``
