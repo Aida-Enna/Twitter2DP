@@ -10,7 +10,7 @@ Big thanks to the [Twikit API wrapper](https://github.com/d60/twikit) for making
 1. Rename the ".env_example" and "users.json_example" files to remove the "_example" from both. Fill them out, there is no limit on the amount of users you can add.
 2. Run the script with ``python twitter2dp.py``
 
-Optional arguments for users.sjon
+Optional arguments for users.json
 
 ``webhook_avatar_url`` - a URL pointing to the image the webhook should use as it's profile picture
 
