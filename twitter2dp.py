@@ -75,22 +75,33 @@ def get_latest_tweets():
 		user = client.get_user_by_screen_name(twitter_user['account_to_check'])
 		user_tweets = user.get_tweets('Tweets')
 		
-		if twitter_user['previous_tweet_id'] == user_tweets[0].id:
+		lasttweet = "Nothing"
+		
+		print("Checking " + str(len(user_tweets)) + " tweet(s) for non-retweets...")
+		for tweet in user_tweets:
+			if tweet.retweet == False:
+				lasttweet = tweet
+				
+		if lasttweet == "Nothing":
+			#No new non-retweet in the past 20? tweets, moving on...
+			continue
+		
+		if twitter_user['previous_tweet_id'] == lasttweet.id:
 			#No new tweet, moving on...
 			continue
 		
 		#omg a hit tweet, let's post it
 		#https://twitter.com/Username/status/TweetID
-		tweetlink = f'https://twitter.com/{twitter_user["account_to_check"]}/status/{user_tweets[0].id}'
+		tweetlink = f'https://twitter.com/{twitter_user["account_to_check"]}/status/{lasttweet.id}'
 		
-		print(f"New tweet found from {twitter_user['account_to_check']} (ID: {user_tweets[0].id}), sending it to the webhook!")
+		print(f"New tweet found from {twitter_user['account_to_check']} (ID: {lasttweet.id}), sending it to the webhook!")
 		
 		#replace the keyword <tweetlink> with the actual twitter link.
 		payload = {'content': twitter_user['posting_text'].replace("<tweetlink>", tweetlink)}
 		response = requests.post(twitter_user['webhook_url'], json=payload)
 		
 		#save the previous ID so we don't keep posting
-		twitter_user['previous_tweet_id'] = user_tweets[0].id
+		twitter_user['previous_tweet_id'] = lasttweet.id
 	
 	#write the JSON with the new previous tweet IDs
 	with open('users.json', 'w') as f:
