@@ -66,6 +66,7 @@ def check_users_json():
 def get_latest_tweets():
 	raw_json = open('users.json')
 	twitter_users = json.load(raw_json)
+	twitter_users_previous = twitter_users
 
 	for twitter_user in twitter_users:
 		#If we don't have a previous tweet recorded, just put something there so it fails successfully.
@@ -114,9 +115,11 @@ def get_latest_tweets():
 		#save the previous ID so we don't keep posting
 		twitter_user['previous_tweet_id'] = lasttweet.id
 	
-	#write the JSON with the new previous tweet IDs
-	with open('users.json', 'w') as f:
-		json.dump(twitter_users, f, ensure_ascii=False, sort_keys=True, indent='\t')
+	#If something has changed, then write the new json
+	if twitter_users_previous is not twitter_users:
+		#write the JSON with the new previous tweet IDs
+		with open('users.json', 'w') as f:
+			json.dump(twitter_users, f, ensure_ascii=False, sort_keys=True, indent='\t')
 	
 if __name__ == '__main__':
 	print(Fore.CYAN + '████████╗██╗    ██╗██╗████████╗████████╗███████╗██████╗ ██████╗ ██████╗ ██████╗ ')
