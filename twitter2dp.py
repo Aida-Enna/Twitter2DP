@@ -77,7 +77,7 @@ def get_latest_tweets():
 		
 		lasttweet = "Nothing"
 		
-		print("Checking " + str(len(user_tweets)) + " tweet(s) for non-retweets...")
+		#print("Checking " + str(len(user_tweets)) + " tweet(s) for non-retweets...")
 		for tweet in user_tweets:
 			if tweet.retweet == False:
 				lasttweet = tweet
