@@ -101,11 +101,14 @@ def get_latest_tweets():
 		print(f"New tweet found from {twitter_user['account_to_check']} (ID: {lasttweet.id}), sending it to the webhook!")
 		
 		#replace the keyword <tweetlink> with the actual twitter link.
-		payload = {
-			'avatar_url': twitter_user['webhook_avatar_url'],
-			'content': twitter_user['posting_text'].replace("<tweetlink>", tweetlink),
-			'username': twitter_user['webhook_name']
-		}
+		payload = {'content': twitter_user['posting_text'].replace("<tweetlink>", tweetlink)}
+		
+		if 'webhook_avatar_url' in twitter_user:
+			payload['avatar_url'] = twitter_user['webhook_avatar_url']
+			
+		if 'webhook_name' in twitter_user:
+			payload['username'] = twitter_user['webhook_name']
+			
 		response = requests.post(twitter_user['webhook_url'], json=payload)
 		
 		#save the previous ID so we don't keep posting
