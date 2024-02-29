@@ -75,15 +75,19 @@ def get_latest_tweets():
 		user = client.get_user_by_screen_name(twitter_user['account_to_check'])
 		user_tweets = user.get_tweets('Tweets')
 		
-		lasttweet = "Nothing"
+		lasttweet = "Nothing?"
 		
 		#print("Checking " + str(len(user_tweets)) + " tweet(s) for non-retweets...")
 		for tweet in user_tweets:
-			if tweet.retweet == False:
+			if not tweet.text.startswith("RT @"): #to be replaced with if tweet.retweeted == False when the API person fixes it
+				#print("Found an original tweet! " + tweet.text)
 				lasttweet = tweet
+			#else:
+				#print("Retweet...")
 				
-		if lasttweet == "Nothing":
-			#No new non-retweet in the past 20? tweets, moving on...
+		#print(lasttweet)
+		if lasttweet == "Nothing?":
+			#print('No new non-retweet in the past 20? tweets, moving on...')
 			continue
 		
 		if twitter_user['previous_tweet_id'] == lasttweet.id:
@@ -97,7 +101,11 @@ def get_latest_tweets():
 		print(f"New tweet found from {twitter_user['account_to_check']} (ID: {lasttweet.id}), sending it to the webhook!")
 		
 		#replace the keyword <tweetlink> with the actual twitter link.
-		payload = {'content': twitter_user['posting_text'].replace("<tweetlink>", tweetlink)}
+		payload = {
+			'avatar_url': twitter_user['webhook_avatar_url'],
+			'content': twitter_user['posting_text'].replace("<tweetlink>", tweetlink),
+			'username': twitter_user['webhook_name']
+		}
 		response = requests.post(twitter_user['webhook_url'], json=payload)
 		
 		#save the previous ID so we don't keep posting
