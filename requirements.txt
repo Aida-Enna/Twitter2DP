@@ -1,1 +1,4 @@
-twikit python-dotenv py-cord
+twikit
+python-dotenv
+py-cord
+colorama

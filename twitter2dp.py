@@ -1,4 +1,10 @@
+# Humans must learn to apply their intelligence correctly and evolve beyond their current state.
+# People must change. Otherwise, even if humanity expands into space, it will only create new
+# conflicts, and that would be a very sad thing. - Aeolia Schenberg, 2091 A.D.
+
+
 import ast
+from colorama import Fore, Back, Style
 import discord
 import json
 import os
@@ -28,7 +34,7 @@ async def on_ready():
 	print(f"{bot.user} is ready and online, checking every {CHECK_TIMER_IN_SECONDS} seconds!")
 	while True:
 		await get_latest_tweets()
-		time.sleep(CHECK_TIMER_IN_SECONDS)
+		time.sleep(int(CHECK_TIMER_IN_SECONDS))
 
 async def get_latest_tweets():
 	raw_json = open('users.json')
@@ -61,5 +67,12 @@ async def get_latest_tweets():
 		json.dump(twitter_users, f, ensure_ascii=False, sort_keys=True, indent='\t')
 	
 if __name__ == '__main__':
+	print(Fore.CYAN + '████████╗██╗    ██╗██╗████████╗████████╗███████╗██████╗ ██████╗ ██████╗ ██████╗ ')
+	print(Fore.CYAN + '╚══██╔══╝██║    ██║██║╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗╚════██╗██╔══██╗██╔══██╗')
+	print(Fore.CYAN + '   ██║   ██║ █╗ ██║██║   ██║      ██║   █████╗  ██████╔╝ █████╔╝██║  ██║██████╔╝')
+	print(Fore.CYAN + '   ██║   ██║███╗██║██║   ██║      ██║   ██╔══╝  ██╔══██╗██╔═══╝ ██║  ██║██╔═══╝ ')
+	print(Fore.CYAN + '   ██║   ╚███╔███╔╝██║   ██║      ██║   ███████╗██║  ██║███████╗██████╔╝██║     ')
+	print(Fore.CYAN + '   ╚═╝    ╚══╝╚══╝ ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝     ')
+	print(Style.RESET_ALL)
 	bot.run(os.getenv('DISCORD_BOT_TOKEN'))
 	
