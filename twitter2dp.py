@@ -36,8 +36,8 @@ def check_users_json():
 		print(Fore.RED + "ERROR: Something went wrong with loading the users.json file. Please check that it is a valid JSON and try again.")
 		exit()
 
+	print("Loading " + str(len(twitter_users)) + " twitter user(s) to monitor...")
 	for twitter_user in twitter_users:
-		print("Loading " + str(len(twitter_users)) + " twitter user(s) to monitor...")
 		
 		if 'account_to_check' not in twitter_user:
 			print(Fore.RED + "ERROR: One of the JSON entries is missing an " + Fore.YELLOW + "account_to_check" + Fore.RED + " entry! Please check the users.json file and relaunch.")
