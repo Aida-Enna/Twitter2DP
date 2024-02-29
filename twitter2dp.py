@@ -19,7 +19,7 @@ YOUR_TWITTER_EMAIL = os.getenv('YOUR_TWITTER_EMAIL')
 YOUR_TWITTER_PASSWORD = os.getenv('YOUR_TWITTER_PASSWORD')
 CHECK_TIMER_IN_SECONDS = os.getenv('CHECK_TIMER_IN_SECONDS')
 
-# Initialize twikit client (https://github.com/d60/twikit)
+# Initialize twikit client
 client = Client('en-US')
 # Login to the service with provided user credentials
 client.login(
@@ -33,7 +33,7 @@ def check_users_json():
 		raw_json = open('users.json')
 		twitter_users = json.load(raw_json)
 	except:
-		print(Fore.RED + f"ERROR: Something went wrong with loading the users.json file. Please check that it is a valid JSON and try again.")
+		print(Fore.RED + "ERROR: Something went wrong with loading the users.json file. Please check that it is a valid JSON and try again.")
 		exit()
 
 	for twitter_user in twitter_users:
