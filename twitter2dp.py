@@ -74,8 +74,7 @@ def get_latest_tweets():
 			twitter_user['previous_tweet_id'] = 'null'
 			WriteChanges = True
 
-		#user = client.get_user_by_screen_name(twitter_user['account_to_check'])
-		user = client.get_user_by_screen_name('play_pso2')
+		user = client.get_user_by_screen_name(twitter_user['account_to_check'])
 		user_tweets = user.get_tweets('Tweets', 20)
 		
 		#print(user_tweets)
