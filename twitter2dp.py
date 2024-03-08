@@ -74,8 +74,11 @@ def get_latest_tweets():
 			twitter_user['previous_tweet_id'] = 'null'
 			WriteChanges = True
 
-		user = client.get_user_by_screen_name(twitter_user['account_to_check'])
-		user_tweets = user.get_tweets('Tweets')
+		#user = client.get_user_by_screen_name(twitter_user['account_to_check'])
+		user = client.get_user_by_screen_name('play_pso2')
+		user_tweets = user.get_tweets('Tweets', 20)
+		
+		#print(user_tweets)
 		
 		lasttweet = "Nothing?"
 		
@@ -84,10 +87,13 @@ def get_latest_tweets():
 			if not tweet.text.startswith("RT @"): #to be replaced with if tweet.retweeted == False when the API person fixes it
 				#print("Found an original tweet! " + tweet.text)
 				lasttweet = tweet
+				break;
 			#else:
 				#print("Retweet...")
 				
+		
 		#print(lasttweet)
+		#return
 		if lasttweet == "Nothing?":
 			#print('No new non-retweet in the past 20? tweets, moving on...')
 			continue
